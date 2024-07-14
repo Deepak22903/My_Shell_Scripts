@@ -16,7 +16,7 @@ These are some the shell scripts that I use on my Arch Linux System.
       :osssssss/        osssso+++.       Terminal: konsole 
      /ossssssss/        +ssssooo/-       CPU: AMD Ryzen 5 4600H with Radeon Graphics (12) @ 3.000GHz 
    `/ossssso+/:-        -:/+osssso+-     GPU: NVIDIA GeForce GTX 1650 Mobile / Max-Q 
-  `+sso+:-`                 `.-/+oso:    Memory: 3474MiB / 15862MiB 
- `++:.                           `-/+/
- .`                                 `/                           
+  '+sso+:-'                `.-/+oso:    Memory: 3474MiB / 15862MiB 
+ '++:.                           `-/+/
+ .'                                 `/                           
                                                                  
