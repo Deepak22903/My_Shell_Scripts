@@ -4,11 +4,11 @@
 git add .
 
 # Prompt for commit message
-echo -n "Commit Message (default: 'Update'): "
+echo -n "Commit Message: "
 read commit_message
 
 # Use default message if none provided
-commit_message=${commit_message:-"Update"}
+commit_message=${commit_message:-"Updated"}
 
 # Commit with the provided or default message
 git commit -m "$commit_message"
