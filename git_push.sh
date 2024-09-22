@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# update .gitignore for larger files (>=50M)
+/home/deepak/ghq/github.com/Deepak22903/My_Shell_Scripts/check_large_file_for_git_push_after_diff.sh
+
 # Add all changes
 git add .
 
