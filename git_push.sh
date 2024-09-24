@@ -22,8 +22,8 @@ show_spinner() {
   local delay=0.1
   local spinstr='|/-\'
   tput civis  # Hide cursor
-  while [ "$(ps a | awk '{print $1}' | grep $pid)" ]; do
-    for char in $spinstr; do
+  while ps -p $pid > /dev/null; do
+    for char in $(echo -n "$spinstr"); do
       printf " [%c]  " "$char"
       sleep $delay
       printf "\b\b\b\b\b\b"
