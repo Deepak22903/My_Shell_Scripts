@@ -19,8 +19,11 @@ git commit -m "$commit_message" >/dev/null 2>&1
 # Display pushing message
 echo "Pushing..."
 
-# Push to the remote repository, suppress output
-git push origin main >/dev/null 2>&1
+# Push to the remote repository with progress bar
+(
+    git push origin main >/dev/null 2>&1
+    echo "100"
+) | pv -pt -i 0.2 -l -s 100 >/dev/null
 
 # Display push success message
 echo "Push success"
