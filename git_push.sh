@@ -1,5 +1,5 @@
 #!/bin/bash
-source ./spinner.sh
+source /home/deepak/ghq/github.com/Deepak22903/My_Shell_Scripts/spinner.sh
 
 # Update .gitignore for larger files (>=50M), suppress all output
 /home/deepak/ghq/github.com/Deepak22903/My_Shell_Scripts/check_large_file_for_git_push_after_diff.sh >/dev/null 2>&1
