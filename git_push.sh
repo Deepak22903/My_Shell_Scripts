@@ -21,21 +21,23 @@ show_spinner() {
   local pid=$!
   local delay=0.1
   local spinstr='|/-\'
+  tput civis  # Hide cursor
   while [ "$(ps a | awk '{print $1}' | grep $pid)" ]; do
-    local temp=${spinstr#?}
-    printf " [%c]  " "$spinstr"
-    spinstr=$temp${spinstr%"$temp"}
-    sleep $delay
-    printf "\b\b\b\b\b\b"
+    for char in $spinstr; do
+      printf " [%c]  " "$char"
+      sleep $delay
+      printf "\b\b\b\b\b\b"
+    done
   done
   printf "    \b\b\b\b"
+  tput cnorm  # Show cursor
 }
 
 # Display pushing message
-echo "Pushing..."
+echo -n "Pushing"
 
 # Push to the remote repository in the background
 git push origin main >/dev/null 2>&1 & show_spinner
 
 # Display push success message
-echo "Push success"
+echo -e "\nPush success"
