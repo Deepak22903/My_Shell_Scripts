@@ -16,15 +16,26 @@ commit_message=${commit_message:-"Updated"}
 # Commit with the provided or default message, suppress output
 git commit -m "$commit_message" >/dev/null 2>&1
 
+# Function to show spinner while pushing
+show_spinner() {
+  local pid=$!
+  local delay=0.1
+  local spinstr='|/-\'
+  while [ "$(ps a | awk '{print $1}' | grep $pid)" ]; do
+    local temp=${spinstr#?}
+    printf " [%c]  " "$spinstr"
+    spinstr=$temp${spinstr%"$temp"}
+    sleep $delay
+    printf "\b\b\b\b\b\b"
+  done
+  printf "    \b\b\b\b"
+}
+
 # Display pushing message
 echo "Pushing..."
 
-# Push to the remote repository with progress bar
-(
-    git push origin main >/dev/null 2>&1
-    echo "100"
-) | pv -pt -i 0.2 -l -s 100 >/dev/null
+# Push to the remote repository in the background
+git push origin main >/dev/null 2>&1 & show_spinner
 
 # Display push success message
 echo "Push success"
-
