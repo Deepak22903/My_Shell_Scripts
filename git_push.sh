@@ -20,7 +20,7 @@ git commit -m "$commit_message" >/dev/null 2>&1
 # Start the spinner with the message "Pushing to repository"
 start_spinner "Pushing to repository"
 
-# Push to the remote repository in the background and wait for it to finish
+# Push to the remote repository and wait for it to finish
 git push origin main >/dev/null 2>&1
 
 # Stop the spinner once the push is complete

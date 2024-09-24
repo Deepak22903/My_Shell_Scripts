@@ -27,7 +27,7 @@ function draw_spinner()
     message=${1:-}
 
     while :; do
-        printf '%s\r' "${marks[i++ % ${#marks[@]}]} ${message}"
+        printf '\r%s %s' "${message}" "${marks[i++ % ${#marks[@]}]}"
         sleep "${delay}"
     done
 }
