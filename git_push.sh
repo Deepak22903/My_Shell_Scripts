@@ -20,7 +20,7 @@ git commit -m "$commit_message" >/dev/null 2>&1
 # Display pushing message
 echo -n "Pushing"
 
-start_spinner()
+# start_spinner()
 
 # Push to the remote repository in the background
 git push origin main >/dev/null 2>&1 &
@@ -28,4 +28,4 @@ git push origin main >/dev/null 2>&1 &
 # Display push success message
 echo -e "\nPush success"
 
-stop_spinner()
+# stop_spinner()
