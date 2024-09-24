@@ -18,7 +18,7 @@ commit_message=${commit_message:-"Updated"}
 git commit -m "$commit_message" >/dev/null 2>&1
 
 # Start the spinner with the message "Pushing to repository"
-start_spinner "Pushing to repository"
+start_spinner "Pushing to repository..."
 
 # Push to the remote repository and wait for it to finish
 git push origin main >/dev/null 2>&1
@@ -27,4 +27,4 @@ git push origin main >/dev/null 2>&1
 stop_spinner
 
 # Display push success message
-echo -e "\nPush success"
+echo -e "\nPush success!"
