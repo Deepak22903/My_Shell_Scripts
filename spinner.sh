@@ -26,6 +26,9 @@ function draw_spinner()
     delay=${SPINNER_DELAY:-0.25}
     message=${1:-}
 
+    # Hide the cursor
+    printf '\e[?25l'
+
     while :; do
         printf '\r%s %s' "${message}" "${marks[i++ % ${#marks[@]}]}"
         sleep "${delay}"
@@ -118,7 +121,9 @@ function stop_spinner()
         kill -9 "${SPIN_PID}" > /dev/null 2>&1;
     fi
     SPIN_PID=0
-    printf '\033[2K'
+
+    # Clear the current line and show the cursor again
+    printf '\033[2K\e[?25h'
 }
 
 # -------------------------------------------------------------------------------- #
