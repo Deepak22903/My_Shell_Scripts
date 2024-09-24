@@ -23,7 +23,7 @@ echo -n "Pushing"
 start_spinner()
 
 # Push to the remote repository in the background
-git push origin main >/dev/null 2>&1 
+git push origin main >/dev/null 2>&1 &
 
 # Display push success message
 echo -e "\nPush success"
