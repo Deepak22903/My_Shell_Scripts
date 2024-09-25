@@ -42,4 +42,4 @@ echo -ne "\r\033[K"
 
 
 # Display push success message
-echo -e "\nPush success!"
+echo -e "Push success!"
