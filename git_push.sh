@@ -9,9 +9,14 @@ start_spinner "Adding changes..."
 
 # Add all changes, suppress output
 git add . >/dev/null 2>&1
-sleep 2
+
+sleep 1
+
 # Stop the spinner once the add is complete
 stop_spinner
+
+# Reset cursor position to avoid prompt shift
+echo -ne "\r\033[K"
 
 # Prompt for commit message
 echo -n "Commit Message: "
