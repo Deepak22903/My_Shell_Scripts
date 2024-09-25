@@ -37,5 +37,9 @@ git push origin main >/dev/null 2>&1
 # Stop the spinner once the push is complete
 stop_spinner
 
+# Reset cursor position to avoid prompt shift
+echo -ne "\r\033[K"
+
+
 # Display push success message
 echo -e "\nPush success!"
