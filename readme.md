@@ -1,5 +1,3 @@
-These are some the shell scripts that I use on my Arch Linux System.
-
 [?25l[?7l[0m[36m[1m                   -`
                   .o+`
                  `ooo/
@@ -24,7 +22,7 @@ These are some the shell scripts that I use on my Arch Linux System.
 [41C[0m[36m[1mOS[0m[0m:[0m Arch Linux x86_64[0m 
 [41C[0m[36m[1mHost[0m[0m:[0m 82B5 Lenovo Legion 5 15ARH05[0m 
 [41C[0m[36m[1mKernel[0m[0m:[0m 6.10.10-arch1-1[0m 
-[41C[0m[36m[1mUptime[0m[0m:[0m 6 hours, 14 mins[0m 
+[41C[0m[36m[1mUptime[0m[0m:[0m 6 hours, 17 mins[0m 
 [41C[0m[36m[1mPackages[0m[0m:[0m 1283 (pacman), 8 (flatpak)[0m 
 [41C[0m[36m[1mShell[0m[0m:[0m fish 3.7.1[0m 
 [41C[0m[36m[1mResolution[0m[0m:[0m 1920x1080[0m 
@@ -35,7 +33,7 @@ These are some the shell scripts that I use on my Arch Linux System.
 [41C[0m[36m[1mTerminal[0m[0m:[0m tmux[0m 
 [41C[0m[36m[1mCPU[0m[0m:[0m AMD Ryzen 5 4600H with Radeon Graphics (12) @ 3.000GHz[0m 
 [41C[0m[36m[1mGPU[0m[0m:[0m NVIDIA GeForce GTX 1650 Mobile / Max-Q[0m 
-[41C[0m[36m[1mMemory[0m[0m:[0m 6274MiB / 15862MiB[0m 
+[41C[0m[36m[1mMemory[0m[0m:[0m 6198MiB / 15862MiB[0m 
 
 [41C[30m[40m   [31m[41m   [32m[42m   [33m[43m   [34m[44m   [35m[45m   [36m[46m   [37m[47m   [m
 [41C[38;5;8m[48;5;8m   [38;5;9m[48;5;9m   [38;5;10m[48;5;10m   [38;5;11m[48;5;11m   [38;5;12m[48;5;12m   [38;5;13m[48;5;13m   [38;5;14m[48;5;14m   [38;5;15m[48;5;15m   [m
