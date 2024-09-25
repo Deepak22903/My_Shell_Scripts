@@ -9,7 +9,7 @@ start_spinner "Adding changes..."
 
 # Add all changes, suppress output
 git add . >/dev/null 2>&1
-
+sleep 2
 # Stop the spinner once the add is complete
 stop_spinner
 
