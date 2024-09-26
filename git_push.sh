@@ -1,6 +1,12 @@
 #!/bin/bash
 source /home/deepak/ghq/github.com/Deepak22903/My_Shell_Scripts/spinner.sh
 
+# Function to stop spinner if script exits unexpectedly
+cleanup() {
+    stop_spinner
+}
+trap cleanup EXIT
+
 # Start the spinner for checking large files changes
 start_spinner "Checking for large files..."
 
@@ -26,9 +32,15 @@ stop_spinner
 # Reset cursor position to avoid prompt shift
 echo -ne "\r\033[K"
 
+# Temporarily disable trap to allow Ctrl+C during commit message prompt
+trap - SIGINT
+
 # Prompt for commit message
 echo -n "Commit Message: "
 read commit_message
+
+# Re-enable the trap after getting the commit message
+trap cleanup EXIT
 
 # Use default message if none provided
 commit_message=${commit_message:-"Updated"}
@@ -47,7 +59,6 @@ stop_spinner
 
 # Reset cursor position to avoid prompt shift
 echo -ne "\r\033[K"
-
 
 # Display push success message
 echo -e "Push success!"

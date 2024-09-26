@@ -52,8 +52,8 @@ function start_spinner()
 
     declare -g SPIN_PID
 
-    # shellcheck disable=SC2312
-    trap stop_spinner $(seq 0 15)
+   # shellcheck disable=SC2312
+   trap stop_spinner $(seq 0 15)
 }
 
 # -------------------------------------------------------------------------------- #
