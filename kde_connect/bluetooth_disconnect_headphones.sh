@@ -1,5 +1,5 @@
 #!/bin/bash
-source /home/deepak/ghq/github.com/Deepak22903/My_Shell_Scripts/spinner.sh
+source /home/deepak/ghq/github.com/Deepak22903/My_Shell_Scripts/global/spinner.sh
 
 # Define the MAC address of the Bluetooth device
 DEVICE_MAC="71:A2:60:FD:59:78"  # Replace with your device MAC address

@@ -1,6 +1,5 @@
 #!/bin/bash
-source /home/deepak/ghq/github.com/Deepak22903/My_Shell_Scripts/spinner.sh
-
+source /home/deepak/ghq/github.com/Deepak22903/My_Shell_Scripts/global/spinner.sh
 # Function to stop spinner if script exits unexpectedly
 cleanup() {
     stop_spinner
