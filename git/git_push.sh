@@ -1,5 +1,5 @@
 #!/bin/bash
-source ../global/spinner.sh
+source ./global/spinner.sh
 
 # Function to stop spinner if script exits unexpectedly
 cleanup() {
@@ -11,7 +11,7 @@ trap cleanup EXIT
 start_spinner "Checking for large files..."
 
 # Update .gitignore for larger files (>=50M), suppress all output
-../git/check_large_file_for_git_push_after_diff.sh 
+./git/check_large_file_for_git_push_after_diff.sh 
 
 sleep 0.5
 
