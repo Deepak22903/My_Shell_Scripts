@@ -1,5 +1,5 @@
 #!/bin/bash
-source /home/deepak/ghq/github.com/Deepak22903/My_Shell_Scripts/global/spinner.sh
+source ../global/spinner.sh
 # Function to stop spinner if script exits unexpectedly
 cleanup() {
     stop_spinner
@@ -10,7 +10,8 @@ trap cleanup EXIT
 start_spinner "Checking for large files..."
 
 # Update .gitignore for larger files (>=50M), suppress all output
-/home/deepak/ghq/github.com/Deepak22903/My_Shell_Scripts/check_large_file_for_git_push_after_diff.sh 
+../git/check_large_file_for_git_push_after_diff.sh 
+
 sleep 0.5
 
 # Stop the spinner 
