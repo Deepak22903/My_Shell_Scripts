@@ -1,5 +1,6 @@
 #!/bin/bash
 source ../global/spinner.sh
+
 # Function to stop spinner if script exits unexpectedly
 cleanup() {
     stop_spinner
