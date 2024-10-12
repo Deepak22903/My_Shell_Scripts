@@ -2,16 +2,16 @@
 
 # Ensure zoxide and fzf are installed
 if ! command -v zoxide &> /dev/null || ! command -v fzf &> /dev/null; then
-    echo "zoxide and fzf are required for this script."
+    echo -e "\e[31mError: zoxide and fzf are required for this script.\e[0m"
     exit 1
 fi
 
 # Get the source path using zoxide and fzf
-source_path=$(zoxide query -l | fzf --height 40% --ansi --preview "ls -l {}" --preview-window=up:30%)
+source_path=$(zoxide query -l | fzf --height 40% --ansi --preview-window=up:30% --border)
 
 # Check if the user selected a path
 if [[ -z "$source_path" ]]; then
-    echo "No source path selected. Exiting."
+    echo -e "\e[33mNo source path selected. Exiting.\e[0m"
     exit 1
 fi
 
@@ -19,15 +19,16 @@ fi
 destination_path="${source_path/data/telegramfs}"
 
 # Print the source and destination paths
-echo "Source Path: $source_path"
-echo "Destination Path: $destination_path"
+echo -e "\n\e[36mSource Path:\e[0m $source_path"
+echo -e "\e[36mDestination Path:\e[0m $destination_path\n"
 
-# Use rsync to synchronize the files, excluding the base directory
-rsync -av --mkpath --no-relative "$source_path/" "$destination_path"
+# Use rsync to synchronize the files, excluding specified directories
+echo -e "\e[34mStarting file transfer...\e[0m"
+rsyncy -av --mkpath --no-relative --exclude='.git/' --exclude='env/' --exclude='.*' "$source_path/" "$destination_path"
 
-# Check the exit status of the rsync command
+# Check the exit status of rsync and print an appropriate message
 if [[ $? -eq 0 ]]; then
-    echo "Files synchronized successfully."
+    echo -e "\n\e[32mFiles synchronized successfully.\e[0m"
 else
-    echo "An error occurred during synchronization."
+    echo -e "\e[31mAn error occurred during synchronization.\e[0m"
 fi
