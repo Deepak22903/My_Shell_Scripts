@@ -1,19 +1,20 @@
-
 #!/bin/bash
 
-# Check if zoxide is installed
-if ! command -v zoxide &> /dev/null
-then
-    echo "zoxide could not be found. Please install it first."
-    exit 1
-fi
+# Function to add directories to zoxide recursively
+add_dirs_to_zoxide() {
+    local dir="$1"
+    shopt -s globstar nullglob
+    for subdir in "$dir"/*/; do
+        # Check if the directory matches any of the exclusion patterns
+        if [[ "$subdir" != *".git/" && "$subdir" != *"env/" && "$subdir" != *"__pycache__/" && "$subdir" != *"node_modules/" ]]; then
+            zoxide add "$subdir"
+            echo "Added $subdir to zoxide."
+            add_dirs_to_zoxide "$subdir" # Recursively add subdirectories
+        fi
+    done
+}
 
-# Add all directories inside the current directory to zoxide
-for dir in */; do
-    if [ -d "$dir" ]; then
-        zoxide add "$dir"
-        echo "Added $dir to zoxide."
-    fi
-done
+# Start adding from the current directory
+add_dirs_to_zoxide "."
 
-echo "All directories have been added to zoxide!"
+echo "All relevant directories have been added to zoxide!"
