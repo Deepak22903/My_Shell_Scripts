@@ -24,11 +24,13 @@ echo -e "\e[36mDestination Path:\e[0m $destination_path\n"
 
 # Use rsync to synchronize the files, excluding specified directories
 echo -e "\e[34mStarting file transfer...\e[0m"
-rsyncy -av -h --stats --mkpath --no-relative --exclude='.git/' --exclude='env/' --exclude='.*' "$source_path/" "$destination_path"
+rsync -av -h --stats --mkpath --no-relative --exclude='.git/' --exclude='env/' --exclude='.*' "$source_path/" "$destination_path"
 
 # Check the exit status of rsync and print an appropriate message
 if [[ $? -eq 0 ]]; then
     echo -e "\n\e[32mFiles synchronized successfully.\e[0m"
+    notify-send "Backup Complete" "Files synchronized successfully."
 else
     echo -e "\e[31mAn error occurred during synchronization.\e[0m"
+    notify-send "Backup Failed" "An error occurred during file synchronization."
 fi
