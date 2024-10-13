@@ -15,14 +15,23 @@ if [ -z "$CONNECTED_DEVICE" ]; then
     exit 1
 fi
 
-# Extract the MAC address and name of the connected device
-DEVICE_MAC=$(echo "$CONNECTED_DEVICE" | awk '{print $2}')
-DEVICE_NAME=$(echo "$CONNECTED_DEVICE" | awk '{for(i=3;i<=NF;i++) printf $i " "; print ""}')
+# Use fzf to allow the user to select a specific device
+SELECTED_DEVICE=$(echo "$CONNECTED_DEVICE" | fzf --height 40% --border --ansi --preview 'bluetoothctl info $(echo {} | awk "{print \$2}")')
+
+# If no device is selected, exit
+if [ -z "$SELECTED_DEVICE" ]; then
+    echo "No device selected. Exiting."
+    exit 1
+fi
+
+# Extract the MAC address and name of the selected device
+DEVICE_MAC=$(echo "$SELECTED_DEVICE" | awk '{print $2}')
+DEVICE_NAME=$(echo "$SELECTED_DEVICE" | awk '{for(i=3;i<=NF;i++) printf $i " "; print ""}')
 
 # Start the spinner
 start_spinner "Disconnecting from $DEVICE_NAME..."
 
-# Disconnect from the device using bluetoothctl
+# Disconnect from the selected device using bluetoothctl
 echo -e "disconnect $DEVICE_MAC\nexit" | bluetoothctl >/dev/null 2>&1
 
 # Continuously check if the device is disconnected

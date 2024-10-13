@@ -1,8 +1,8 @@
 #!/bin/bash
 source /home/deepak/ghq/github.com/Deepak22903/My_Shell_Scripts/global/spinner.sh
 
-# Get the list of paired devices
-DEVICE=$(bluetoothctl devices | fzf --prompt="Select a Bluetooth device: " --height=10 --border)
+# Get the list of paired devices and use fzf with a preview window
+DEVICE=$(bluetoothctl devices | fzf --prompt="Select a Bluetooth device: " --height=40% --border --ansi --preview 'bluetoothctl info $(echo {} | awk "{print \$2}")')
 
 # Extract the MAC address from the selected device
 DEVICE_MAC=$(echo "$DEVICE" | awk '{print $2}')
