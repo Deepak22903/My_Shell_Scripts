@@ -22,9 +22,9 @@ destination_path="${source_path/data/telegramfs}"
 echo -e "\n\e[36mSource Path:\e[0m $source_path"
 echo -e "\e[36mDestination Path:\e[0m $destination_path\n"
 
-# Use rsync to synchronize the files, excluding specified directories
+# Use rsync to synchronize the files, excluding specified directories and skipping files larger than 1 GB
 echo -e "\e[34mStarting file transfer...\e[0m"
-rsyncy -av -h --mkpath --no-relative --exclude='.git/' --exclude='env/' --exclude='.*' "$source_path/" "$destination_path"
+rsyncy -av -h --mkpath --no-relative --exclude='.git/' --exclude='env/' --exclude='.*' --max-size=1G "$source_path/" "$destination_path"
 
 # Check the exit status of rsync and print an appropriate message
 if [[ $? -eq 0 ]]; then
