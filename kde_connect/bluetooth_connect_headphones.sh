@@ -1,12 +1,22 @@
 #!/bin/bash
 source /home/deepak/ghq/github.com/Deepak22903/My_Shell_Scripts/global/spinner.sh
-# Define the MAC address of the Bluetooth device
-DEVICE_MAC="71:A2:60:FD:59:78"  # Replace with your device MAC address
+
+# Get the list of paired devices and use fzf with a preview window
+DEVICE=$(bluetoothctl devices | fzf --prompt="Select a Bluetooth device: " --height=40% --border --ansi --preview 'bluetoothctl info $(echo {} | awk "{print \$2}")')
+
+# Extract the MAC address from the selected device
+DEVICE_MAC=$(echo "$DEVICE" | awk '{print $2}')
+
+# If no device is selected, exit the script
+if [ -z "$DEVICE_MAC" ]; then
+    echo "No device selected. Exiting..."
+    exit 1
+fi
 
 # Start the spinner
 start_spinner "Connecting to device..."
 
-# Power on and connect to the device using bluetoothctl
+# Power on and connect to the selected device using bluetoothctl
 echo -e "power on\nconnect $DEVICE_MAC\nexit" | bluetoothctl >/dev/null 2>&1
 
 # Continuously check if the device is connected
