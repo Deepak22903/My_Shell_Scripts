@@ -13,8 +13,8 @@ cleanup() {
 }
 trap cleanup EXIT
 
-# Start the spinner for checking large files changes
-start_spinner "${YELLOW}🔍 Checking for large files...${RESET}"
+# Start the spinner for checking large files changes (no color codes)
+start_spinner "🔍 Checking for large files..."
 
 # Update .gitignore for larger files (>=50M), suppress all output
 /home/deepak/ghq/github.com/Deepak22903/My_Shell_Scripts/git/check_large_file_for_git_push_after_diff.sh
@@ -24,8 +24,8 @@ sleep 0.5
 # Stop the spinner 
 stop_spinner
 
-# Start the spinner for adding changes
-start_spinner "${BLUE}➕ Adding changes...${RESET}"
+# Start the spinner for adding changes (no color codes)
+start_spinner "➕ Adding changes..."
 
 # Add all changes, suppress output
 git add . >/dev/null 2>&1
@@ -54,8 +54,8 @@ commit_message=${commit_message:-"Updated"}
 # Commit with the provided or default message, suppress output
 git commit -m "$commit_message" >/dev/null 2>&1
 
-# Start the spinner with the message "Pushing to repository"
-start_spinner "${YELLOW}🚀 Pushing to repository...${RESET}"
+# Start the spinner with the message "Pushing to repository" (no color codes)
+start_spinner "🚀 Pushing to repository..."
 
 # Push to the remote repository and wait for it to finish
 git push origin main >/dev/null 2>&1
