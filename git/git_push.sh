@@ -5,7 +5,6 @@ source /home/deepak/ghq/github.com/Deepak22903/My_Shell_Scripts/global/spinner.s
 GREEN="\033[0;32m"
 YELLOW="\033[1;33m"
 BLUE="\033[1;34m"
-RED="\033[0;31m"
 RESET="\033[0m"
 
 # Function to stop spinner if script exits unexpectedly
