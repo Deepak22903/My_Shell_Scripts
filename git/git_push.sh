@@ -54,11 +54,14 @@ commit_message=${commit_message:-"Updated"}
 # Commit with the provided or default message, suppress output
 git commit -m "$commit_message" >/dev/null 2>&1
 
-# Start the spinner with the message "Pushing to repository" (no color codes)
-start_spinner "🚀 Pushing to repository..."
+# Get the current branch name
+current_branch=$(git rev-parse --abbrev-ref HEAD)
 
-# Push to the remote repository and wait for it to finish
-git push origin main >/dev/null 2>&1
+# Start the spinner with the message "Pushing to repository" (no color codes)
+start_spinner "🚀 Pushing to $current_branch branch..."
+
+# Push to the current branch of the remote repository and wait for it to finish
+git push origin "$current_branch" >/dev/null 2>&1
 
 # Stop the spinner once the push is complete
 stop_spinner
@@ -67,4 +70,4 @@ stop_spinner
 echo -ne "\r\033[K"
 
 # Display push success message
-echo -e "${GREEN}✅ Push successful!${RESET}"
+echo -e "${GREEN}✅ Push to $current_branch successful!${RESET}"
