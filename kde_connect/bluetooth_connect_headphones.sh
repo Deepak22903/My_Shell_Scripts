@@ -14,23 +14,27 @@ if [ -z "$DEVICE_MAC" ]; then
 fi
 
 # Start the spinner
-start_spinner "Connecting to device..."
+start_spinner "Attempting to connect to the device..."
 
-# Power on and connect to the selected device using bluetoothctl
-echo -e "power on\nconnect $DEVICE_MAC\nexit" | bluetoothctl >/dev/null 2>&1
+# Retry connection at intervals
+RETRY_INTERVAL=5  # Interval in seconds
+CONNECTED=false
 
-# Continuously check if the device is connected
-while true; do
+while [ "$CONNECTED" = false ]; do
+    # Power on and attempt to connect to the selected device
+    echo -e "power on\nconnect $DEVICE_MAC\nexit" | bluetoothctl >/dev/null 2>&1
+
     # Check if the device is connected
     if bluetoothctl info "$DEVICE_MAC" | grep -q "Connected: yes"; then
         # Get the device name
         DEVICE_NAME=$(bluetoothctl info "$DEVICE_MAC" | grep "Name:" | awk -F ": " '{print $2}')
         echo -e "\nConnection to $DEVICE_NAME successful!"
-        break
+        CONNECTED=true
     else
-        sleep 1  # Check every second
+        echo "Connection attempt failed. Retrying in $RETRY_INTERVAL seconds..."
+        sleep $RETRY_INTERVAL
     fi
 done
 
-# Stop the spinner once the connection attempt is complete
+# Stop the spinner once the connection is successful
 stop_spinner
