@@ -24,7 +24,7 @@ echo -e "\e[36mDestination Path:\e[0m $destination_path\n"
 
 # Use rsync to synchronize the files, excluding specified directories and skipping files larger than 1 GB
 echo -e "\e[34mStarting file transfer...\e[0m"
-rsyncy -av -h --mkpath --no-relative --exclude='SteamLibrary*' --exclude='WIN_*' --exclude='Program Files*' --exclude='IntelliJ*' --exclude='Large_Files*' --exclude='Genshin*' --exclude='Fooocus*' --exclude='AI_Lab*' --exclude='node_modules/' --exclude='Adobe*' --exclude='.git/' --exclude='env/' --exclude='.*' --max-size=0.1G "$source_path/" "$destination_path"
+rsyncy -av -h --mkpath --no-relative --exclude='SteamLibrary*' --exclude='WIN_*' --exclude='Program Files*' --exclude='IntelliJ*' --exclude='Large_Files*' --exclude='Genshin*' --exclude='Fooocus*' --exclude='AI_Lab*' --exclude='node_modules/' --exclude='Adobe*' --exclude='.git/' --exclude='env/' --exclude='.*' --max-size=0.3G "$source_path/" "$destination_path"
 
 # Check the exit status of rsync and print an appropriate message
 if [[ $? -eq 0 ]]; then
