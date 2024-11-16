@@ -12,17 +12,17 @@ NC='\033[0m' # No Color
 # Source the spinner script
 source /home/deepak/ghq/github.com/Deepak22903/My_Shell_Scripts/global/spinner.sh
 
-# ASCII Art Banner
-print_banner() {
-    echo -e "${BLUE}"
-    echo '  ____  _            _              _   _     '
-    echo ' | __ )| |_   _  ___| |_ ___   ___ | |_| |__  '
-    echo ' |  _ \| | | | |/ _ \ __/ _ \ / _ \| __| |_ \ '
-    echo ' | |_) | | |_| |  __/ || (_) | (_) | |_| | | |'
-    echo ' |____/|_|\__,_|\___|\__\___/ \___/ \__|_| |_|'
-    echo -e "${NC}"
-    echo -e "${CYAN}Bluetooth Connection Manager${NC}\n"
-}
+# # ASCII Art Banner
+# print_banner() {
+#     echo -e "${BLUE}"
+#     echo '  ____  _            _              _   _     '
+#     echo ' | __ )| |_   _  ___| |_ ___   ___ | |_| |__  '
+#     echo ' |  _ \| | | | |/ _ \ __/ _ \ / _ \| __| |_ \ '
+#     echo ' | |_) | | |_| |  __/ || (_) | (_) | |_| | | |'
+#     echo ' |____/|_|\__,_|\___|\__\___/ \___/ \__|_| |_|'
+#     echo -e "${NC}"
+#     echo -e "${CYAN}Bluetooth Connection Manager${NC}\n"
+# }
 
 # Error handling function
 handle_error() {
@@ -94,7 +94,7 @@ connect_device() {
     fi
 }
 
- Function to disconnect from a device
+ # Function to disconnect from a device
 disconnect_device() {
     local device_mac="$1"
     local device_name=$(get_device_name "$device_mac")
