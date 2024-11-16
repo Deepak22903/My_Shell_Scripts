@@ -124,8 +124,8 @@ disconnect_device() {
 }
 
 # Main script
-clear  # Clear the screen before starting
-print_banner
+# clear  # Clear the screen before starting
+# print_banner
 
 # Get list of all devices
 all_devices=$(bluetoothctl devices)
