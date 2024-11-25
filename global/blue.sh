@@ -123,9 +123,30 @@ disconnect_device() {
     handle_error "Failed to disconnect from $device_name after $max_attempts attempts"
 }
 
+# Function to ensure Bluetooth is enabled
+ensure_bluetooth_enabled() {
+    # Check if Bluetooth is powered on
+    if ! bluetoothctl show | grep -q "Powered: yes"; then
+        echo -e "${YELLOW}Bluetooth is not enabled. Enabling Bluetooth...${NC}"
+        echo -e "power on\nexit" | bluetoothctl >/dev/null 2>&1
+        
+        # Verify if Bluetooth was successfully enabled
+        if bluetoothctl show | grep -q "Powered: yes"; then
+            echo -e "${GREEN}Bluetooth is now enabled.${NC}"
+        else
+            handle_error "Failed to enable Bluetooth. Please check your system settings."
+        fi
+    else
+        echo -e "${GREEN}Bluetooth is already enabled.${NC}"
+    fi
+}
+
 # Main script
 # clear  # Clear the screen before starting
 # print_banner
+
+# Call the function at the start of the script
+ensure_bluetooth_enabled
 
 # Get list of all devices
 all_devices=$(bluetoothctl devices)
