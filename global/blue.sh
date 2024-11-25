@@ -125,19 +125,30 @@ disconnect_device() {
 
 # Function to ensure Bluetooth is enabled
 ensure_bluetooth_enabled() {
-    # Check if Bluetooth is powered on
-    if ! bluetoothctl show | grep -q "Powered: yes"; then
-        echo -e "${YELLOW}Bluetooth is not enabled. Enabling Bluetooth...${NC}"
-        echo -e "power on\nexit" | bluetoothctl >/dev/null 2>&1
+    # Check if Bluetooth is blocked (rfkill)
+    if rfkill list bluetooth | grep -q "Soft blocked: yes"; then
+        echo -e "${YELLOW}Bluetooth is soft-blocked. Unblocking Bluetooth...${NC}"
+        rfkill unblock bluetooth
         
-        # Verify if Bluetooth was successfully enabled
-        if bluetoothctl show | grep -q "Powered: yes"; then
-            echo -e "${GREEN}Bluetooth is now enabled.${NC}"
+        # Verify if Bluetooth was successfully unblocked
+        if rfkill list bluetooth | grep -q "Soft blocked: no"; then
+            echo -e "${GREEN}Bluetooth is now unblocked.${NC}"
         else
-            handle_error "Failed to enable Bluetooth. Please check your system settings."
+            handle_error "Failed to unblock Bluetooth. Please check your system settings."
         fi
-    else
-        echo -e "${GREEN}Bluetooth is already enabled.${NC}"
+    fi
+
+    # Check if Bluetooth is powered on (Blueman)
+    if ! systemctl is-active --quiet bluetooth; then
+        echo -e "${YELLOW}Bluetooth service is not active. Starting Bluetooth service...${NC}"
+        sudo systemctl start bluetooth
+
+        # Verify if the Bluetooth service was successfully started
+        if systemctl is-active --quiet bluetooth; then
+            echo -e "${GREEN}Bluetooth service is now active.${NC}"
+        else
+            handle_error "Failed to start Bluetooth service. Please check your system settings."
+        fi
     fi
 }
 
