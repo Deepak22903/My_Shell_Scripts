@@ -1,21 +1,27 @@
 #!/bin/bash
 
 # Fetch current brightness level
-current_brightness=$(qdbus6 org.kde.Solid.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl org.kde.Solid.PowerManagement.Actions.BrightnessControl.brightness)
+current_brightness=$(brightnessctl get)
 
 if [ -z "$current_brightness" ]; then
     echo "Failed to retrieve current brightness level."
     exit 1
 fi
 
-# Calculate maximum brightness (assuming maximum is 100)
-max_brightness=100
+# Fetch maximum brightness level
+max_brightness=$(brightnessctl max)
 
 # Calculate 5% increase in brightness
 increase_amount=$(echo "$max_brightness * 0.05" | bc)
 
-# Calculate new brightness level (ensure it's an integer)
+# Calculate new brightness level
 new_brightness=$(echo "$current_brightness + $increase_amount" | bc | cut -d '.' -f 1)
 
+# Ensure new brightness level does not exceed max brightness
+if [ "$new_brightness" -gt "$max_brightness" ]; then
+    new_brightness=$max_brightness
+fi
+
 # Set the new brightness level
-qdbus6 org.kde.Solid.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl org.kde.Solid.PowerManagement.Actions.BrightnessControl.setBrightness $new_brightness
+brightnessctl set "$new_brightness"
+
