@@ -1,11 +1,23 @@
 #!/bin/bash
-source /home/deepak/ghq/github.com/Deepak22903/My_Shell_Scripts/global/spinner.sh
 
 # Define color codes
-GREEN="\033[0;32m"
-YELLOW="\033[1;33m"
-BLUE="\033[1;34m"
+# Colors and formatting
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+YELLOW='\033[1;33m'
+CYAN='\033[0;36m'
+BOLD='\033[1m'
+NC='\033[0m' # No Color
 RESET="\033[0m"
+
+if [ ! -d "./.git" ]; then
+  echo -e "${RED}${BOLD}Not in the root git directory!${NC}"
+  exit 1
+fi
+
+source /home/deepak/ghq/github.com/Deepak22903/My_Shell_Scripts/global/spinner.sh
+
 
 # Function to stop spinner if script exits unexpectedly
 cleanup() {
