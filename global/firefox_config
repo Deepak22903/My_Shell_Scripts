@@ -1,0 +1,57 @@
+#!/bin/bash
+
+CONFIG_FILE="/home/deepak/.mozilla/firefox/29efe65o.default-release/chrome/userChrome.css"
+
+# Using a heredoc to properly handle the multiline configuration
+read -r -d '' ZEN_CONFIG <<'EOF'
+/*
+ * Do not remove the @namespace line -- it's required for correct functioning
+ */
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"); /* set default namespace to XUL */
+/*
+ * Hide tab bar, navigation bar and scrollbars
+ * !important may be added to force override, but not necessary
+ * #content is not necessary to hide scroll bars
+ */
+#TabsToolbar {visibility: collapse;}
+#navigator-toolbox {visibility: collapse;}
+browser {margin-right: -14px; margin-bottom: -14px;}
+EOF
+
+# Function to ensure the chrome directory exists
+ensure_chrome_dir() {
+  chrome_dir=$(dirname "$CONFIG_FILE")
+  if [ ! -d "$chrome_dir" ]; then
+    mkdir -p "$chrome_dir"
+  fi
+}
+
+# Function to apply zen mode configuration
+apply_zen_mode() {
+  ensure_chrome_dir
+  echo "$ZEN_CONFIG" >"$CONFIG_FILE"
+  echo "Zen mode configuration applied successfully."
+}
+
+# Function to clear configuration
+clear_config() {
+  ensure_chrome_dir
+  echo "" >"$CONFIG_FILE"
+  echo "Configuration cleared successfully."
+}
+
+# Main script logic
+case "$1" in
+"--zen")
+  apply_zen_mode
+  ;;
+"--default")
+  clear_config
+  ;;
+*)
+  echo "Usage: firefox_config [--zen|--default]"
+  echo "  --zen     : Apply zen mode configuration"
+  echo "  --default : Clear all configuration"
+  exit 1
+  ;;
+esac
