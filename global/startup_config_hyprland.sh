@@ -3,7 +3,7 @@
 wait_for_window() {
   local keyword=$1
   while ! hyprctl clients | grep -iq "$keyword"; do
-    sleep 0.1
+    sleep 0.01
   done
 }
 
