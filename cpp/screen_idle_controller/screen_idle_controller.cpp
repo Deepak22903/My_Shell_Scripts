@@ -1,8 +1,43 @@
 #include <cstdlib>
+#include <fstream>
 #include <iostream>
+#include <nlohmann/json.hpp>
+#include <nlohmann/json_fwd.hpp>
 #include <string>
 using namespace std;
+using json = nlohmann::json;
 
+// Function to update the status in status.json
+void updateStatus(const string &newStatus) {
+  ifstream file("/home/deepak/ghq/github.com/Deepak22903/My_Shell_Scripts/cpp/"
+                "screen_idle_controller/status.json");
+
+  json jsonData;
+
+  // Read existing JSON file if it exists
+  if (file) {
+    file >> jsonData;
+    file.close();
+  } else {
+    cerr << "Warning: status.json not found, creating a new one.\n";
+  }
+
+  // Update the status
+  jsonData["status"] = newStatus;
+
+  // Write back to the file
+  ofstream outFile("/home/deepak/ghq/github.com/Deepak22903/My_Shell_Scripts/"
+                   "cpp/screen_idle_controller/status.json");
+  if (!outFile) {
+    cerr << "Error: Could not open status.json for writing.\n";
+    return;
+  }
+
+  outFile << jsonData.dump(4); // Pretty-print with indentation
+  outFile.close();
+
+  cout << "Status updated to: " << newStatus << endl;
+}
 void reload_config() {
   cout << "Reloading config...\n";
   int r1 = system("pkill hypridle");
@@ -30,6 +65,7 @@ void check_errors(int ret) {
 }
 
 int main(int argc, char *argv[]) {
+
   if (argc < 2) {
     cerr << "Usage : screen [OPTIONS]"
             "\nUse screen -h for help\n";
@@ -40,10 +76,11 @@ int main(int argc, char *argv[]) {
             "-h : for help\n"
             "--no-sleep : Prevents the system from suspend state\n"
             "--no-screenoff : Prevents the screen from turning off\n"
-            "--default : Restores to original state\n";
+            "--default : Restores to original state\n"
+            "--status : Prints the current status\n";
   } else {
-    cout << "Updating config...\n";
     if (string(argv[1]) == "--no-sleep") {
+      cout << "Updating config...\n";
       int ret =
           system("cp "
                  "/home/deepak/ghq/github.com/Deepak22903/My_Shell_Scripts/cpp/"
@@ -51,7 +88,9 @@ int main(int argc, char *argv[]) {
                  "~/.config/hypr/hypridle.conf");
       check_errors(ret);
       reload_config();
+      updateStatus("Status: no-sleep");
     } else if (string(argv[1]) == "--no-screenoff") {
+      cout << "Updating config...\n";
       int ret =
           system("cp "
                  "/home/deepak/ghq/github.com/Deepak22903/My_Shell_Scripts/"
@@ -59,7 +98,9 @@ int main(int argc, char *argv[]) {
                  "~/.config/hypr/hypridle.conf");
       check_errors(ret);
       reload_config();
+      updateStatus("Status: no-screenoff");
     } else if (string(argv[1]) == "--default") {
+      cout << "Updating config...\n";
       int ret =
           system("cp "
                  "/home/deepak/ghq/github.com/Deepak22903/My_Shell_Scripts/"
@@ -67,6 +108,18 @@ int main(int argc, char *argv[]) {
                  "~/.config/hypr/hypridle.conf");
       check_errors(ret);
       reload_config();
+      updateStatus("Status: default");
+    } else if (string(argv[1]) == "--status") {
+      ifstream file("/home/deepak/ghq/github.com/Deepak22903/My_Shell_Scripts/"
+                    "cpp/screen_idle_controller/status.json");
+      if (!file) {
+        cerr << "Error in opening status.json file\n";
+        return -1;
+      }
+      nlohmann::json jsonData;
+      file >> jsonData;
+      cout << jsonData["status"] << endl;
+
     } else {
       cout << "Invalid option!\n Use screen -h for help.\n";
     }
