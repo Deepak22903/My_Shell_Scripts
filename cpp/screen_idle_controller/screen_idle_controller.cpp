@@ -118,7 +118,9 @@ int main(int argc, char *argv[]) {
       }
       nlohmann::json jsonData;
       file >> jsonData;
-      cout << jsonData["status"] << endl;
+      string str = jsonData["status"];
+      string res = str.substr(0, str.size() - 1);
+      cout << res << endl;
 
     } else {
       cout << "Invalid option!\n Use screen -h for help.\n";
