@@ -119,7 +119,7 @@ int main(int argc, char *argv[]) {
       nlohmann::json jsonData;
       file >> jsonData;
       string str = jsonData["status"];
-      string res = str.substr(0, str.size() - 1);
+      string res = str.substr(0, str.size());
       cout << res << endl;
 
     } else {
