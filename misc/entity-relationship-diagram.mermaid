@@ -1,0 +1,58 @@
+erDiagram
+    USER {
+        string userID PK
+        string email
+        string password
+        string name
+        string role
+        datetime createdAt
+    }
+    
+    JOB_SEEKER {
+        string userID PK,FK
+        string resume
+        string skills
+        string education
+        string experience
+    }
+    
+    EMPLOYER {
+        string userID PK,FK
+        string companyName
+        string industry
+        string location
+        string description
+    }
+    
+    ADMIN {
+        string userID PK,FK
+        string accessLevel
+    }
+    
+    JOB_LISTING {
+        string jobID PK
+        string employerID FK
+        string title
+        string description
+        string location
+        string requirements
+        string salary
+        datetime postedDate
+        string status
+    }
+    
+    APPLICATION {
+        string applicationID PK
+        string jobID FK
+        string userID FK
+        datetime appliedDate
+        string status
+        string coverLetter
+    }
+    
+    USER ||--o{ JOB_LISTING : posts
+    USER ||--o{ APPLICATION : submits
+    JOB_LISTING ||--o{ APPLICATION : receives
+    USER |o--|| JOB_SEEKER : "is a"
+    USER |o--|| EMPLOYER : "is a"
+    USER |o--|| ADMIN : "is a"

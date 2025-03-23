@@ -1,0 +1,95 @@
+classDiagram
+    class User {
+        -String userId
+        -String email
+        -String password
+        -String name
+        -String role
+        -Date createdAt
+        +register()
+        +login()
+        +updateProfile()
+        +logout()
+    }
+    
+    class JobSeeker {
+        -String resume
+        -String[] skills
+        -String education
+        -String experience
+        +applyForJob()
+        +viewApplications()
+        +searchJobs()
+        +uploadResume()
+    }
+    
+    class Employer {
+        -String companyName
+        -String industry
+        -String location
+        -String description
+        +postJob()
+        +reviewApplications()
+        +manageJobs()
+        +updateCompanyProfile()
+    }
+    
+    class Admin {
+        -String accessLevel
+        +manageUsers()
+        +manageJobs()
+        +generateReports()
+        +moderateContent()
+    }
+    
+    class JobListing {
+        -String jobId
+        -String employerId
+        -String title
+        -String description
+        -String location
+        -String[] requirements
+        -String salary
+        -Date postedDate
+        -String status
+        +create()
+        +update()
+        +delete()
+        +getApplicants()
+    }
+    
+    class Application {
+        -String applicationId
+        -String jobId
+        -String userId
+        -Date appliedDate
+        -String status
+        -String coverLetter
+        +submit()
+        +withdraw()
+        +updateStatus()
+    }
+    
+    class Authentication {
+        +verifyEmail()
+        +googleLogin()
+        +generateToken()
+        +validateToken()
+        +resetPassword()
+    }
+    
+    class NotificationService {
+        +sendEmail()
+        +sendInAppNotification()
+    }
+    
+    User <|-- JobSeeker
+    User <|-- Employer
+    User <|-- Admin
+    
+    JobSeeker "1" -- "many" Application : submits
+    Employer "1" -- "many" JobListing : creates
+    JobListing "1" -- "many" Application : receives
+    
+    Authentication -- User : authenticates
+    NotificationService -- Application : notifies

@@ -1,0 +1,43 @@
+sequenceDiagram
+    actor JobSeeker
+    participant UI as Job Portal UI
+    participant API as Backend API
+    participant DB as Database
+    participant Employer
+    
+    JobSeeker->>UI: Login
+    UI->>API: Send credentials
+    API->>DB: Validate user
+    DB-->>API: Return user data
+    API-->>UI: Return auth token
+    UI-->>JobSeeker: Show dashboard
+    
+    JobSeeker->>UI: Search for jobs
+    UI->>API: Query jobs
+    API->>DB: Fetch job listings
+    DB-->>API: Return job data
+    API-->>UI: Display job listings
+    UI-->>JobSeeker: Show job results
+    
+    JobSeeker->>UI: Select job
+    UI->>API: Request job details
+    API->>DB: Fetch job details
+    DB-->>API: Return detailed job info
+    API-->>UI: Display job details
+    UI-->>JobSeeker: Show complete job information
+    
+    JobSeeker->>UI: Submit application
+    UI->>API: Send application data
+    API->>DB: Store application
+    DB-->>API: Confirm storage
+    API-->>UI: Application confirmation
+    UI-->>JobSeeker: Show success message
+    
+    API->>DB: Update job application count
+    API->>Employer: Send notification
+    Employer->>UI: Login to review
+    UI->>API: Request applications
+    API->>DB: Fetch applications
+    DB-->>API: Return applications
+    API-->>UI: Display applications
+    UI-->>Employer: Show applicant details

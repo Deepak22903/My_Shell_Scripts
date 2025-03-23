@@ -1,0 +1,25 @@
+graph TD
+    U[User] --> |Login/Register| A[Authentication System]
+    A --> |Auth Data| DB[(Database)]
+    A --> |Auth Token| U
+    
+    U --> |Browse Jobs| JS[Job Search]
+    JS --> |Query| DB
+    DB --> |Job Listings| JS
+    JS --> |Results| U
+    
+    U --> |Post Job| JP[Job Posting]
+    JP --> |Store| DB
+    
+    U --> |Apply for Job| JA[Job Application]
+    JA --> |Store| DB
+    JA --> |Notification| E[Employer]
+    
+    E --> |Manage Jobs| JM[Job Management]
+    JM --> |Query/Update| DB
+    JM --> |Results| E
+    
+    A1[Admin] --> |Moderate| AM[Admin Module]
+    AM --> |Query/Update| DB
+    DB --> |Data| AM
+    AM --> |Results| A1

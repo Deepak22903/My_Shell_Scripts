@@ -1,0 +1,46 @@
+graph TD
+    subgraph "Job Portal System"
+        subgraph "Job Seeker Use Cases"
+            UC1[Register/Login]
+            UC2[Browse Jobs]
+            UC3[Apply for Jobs]
+            UC4[Manage Applications]
+            UC5[Update Profile]
+        end
+        
+        subgraph "Employer Use Cases"
+            UC6[Register/Login]
+            UC7[Post Job Listings]
+            UC8[Review Applications]
+            UC9[Manage Job Listings]
+            UC10[Update Company Profile]
+        end
+        
+        subgraph "Admin Use Cases"
+            UC11[Manage Users]
+            UC12[Moderate Content]
+            UC13[Generate Reports]
+        end
+    end
+    
+    JS[Job Seeker] --- UC1
+    JS --- UC2
+    JS --- UC3
+    JS --- UC4
+    JS --- UC5
+    
+    EMP[Employer] --- UC6
+    EMP --- UC7
+    EMP --- UC8
+    EMP --- UC9
+    EMP --- UC10
+    
+    ADM[Admin] --- UC11
+    ADM --- UC12
+    ADM --- UC13
+    
+    %% Include relationships
+    UC3 -.-> UC2
+    UC4 -.-> UC3
+    UC8 -.-> UC7
+    UC9 -.-> UC7
