@@ -15,9 +15,9 @@ firefox &
 wait_for_window "firefox" # adjust keyword if needed
 hyprctl dispatch movetoworkspacesilent 2
 
-obsidian &
-wait_for_window "obsidian" # adjust keyword if needed
-hyprctl dispatch movetoworkspacesilent 9
+# obsidian &
+# wait_for_window "obsidian" # adjust keyword if needed
+# hyprctl dispatch movetoworkspacesilent 9
 
 # hyprctl dispatch exec "kitty -e yazi"
 # wait_for_window "yazi"     # adjust keyword if needed

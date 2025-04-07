@@ -18,26 +18,25 @@ fi
 
 source /home/deepak/ghq/github.com/Deepak22903/My_Shell_Scripts/global/spinner.sh
 
-
 # Function to stop spinner if script exits unexpectedly
 cleanup() {
-    stop_spinner
+  stop_spinner
 }
 trap cleanup EXIT
 
 # Start the spinner for checking large files changes (no color codes)
-start_spinner "🔍 Checking for large files..."
+start_spinner " Checking for large files..."
 
 # Update .gitignore for larger files (>=50M), suppress all output
 /home/deepak/ghq/github.com/Deepak22903/My_Shell_Scripts/git/check_large_file_for_git_push_after_diff.sh
 
 sleep 0.25
 
-# Stop the spinner 
+# Stop the spinner
 stop_spinner
 
 # Start the spinner for adding changes (no color codes)
-start_spinner "➕ Adding changes..."
+start_spinner " Adding changes..."
 
 # Add all changes, suppress output
 git add . >/dev/null 2>&1
@@ -54,7 +53,7 @@ echo -ne "\r\033[K"
 trap - SIGINT
 
 # Prompt for commit message
-echo -e "${GREEN}✍️  Commit Message: ${RESET}\c"
+echo -e "${GREEN}󰞚 Commit Message: ${RESET}\c"
 read commit_message
 
 # Re-enable the trap after getting the commit message
@@ -70,7 +69,7 @@ git commit -m "$commit_message" >/dev/null 2>&1
 current_branch=$(git rev-parse --abbrev-ref HEAD)
 
 # Start the spinner with the message "Pushing to repository" (no color codes)
-start_spinner "🚀 Pushing to $current_branch branch..."
+start_spinner " Pushing to $current_branch branch..."
 
 # Push to the current branch of the remote repository and wait for it to finish
 git push origin "$current_branch" >/dev/null 2>&1
@@ -82,4 +81,4 @@ stop_spinner
 echo -ne "\r\033[K"
 
 # Display push success message
-echo -e "${GREEN}✅ Push to $current_branch successful!${RESET}"
+echo -e "${GREEN}󰸞 Push to $current_branch successful!${RESET}"
