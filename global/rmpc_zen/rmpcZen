@@ -18,9 +18,6 @@ if [ ! -f "$SOURCE_FILE_2" ]; then
   exit 1
 fi
 
-# Move contents
-cat "$SOURCE_FILE_1" >>"$DEST_FILE_1"
->"$SOURCE_FILE_1"
-
-cat "$SOURCE_FILE_2" >>"$DEST_FILE_2"
->"$SOURCE_FILE_2"
+# Copy contents and override destination files
+cp "$SOURCE_FILE_1" "$DEST_FILE_1"
+cp "$SOURCE_FILE_2" "$DEST_FILE_2"
