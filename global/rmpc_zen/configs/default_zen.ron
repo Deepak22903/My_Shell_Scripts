@@ -21,7 +21,7 @@
     highlight_border_style: (fg: "blue"),
     symbols: (song: "󰝚 ", dir: " ", marker: "* ", ellipsis: "..."),
     progress_bar: (
-        symbols: ["█", "█", "█"],
+        symbols: ["❚", "❚", " "],
         track_style: (fg: "#1e2030"),
         elapsed_style: (fg: "blue"),
         thumb_style: (fg: "blue", bg: "#1e2030"),
@@ -37,14 +37,14 @@
             prop: (kind: Property(Title),
                 default: (kind: Text("Unknown"))
             ),
-            width: "100%",
+            width: "0%",
         ),
     ],
 layout: Split(
         direction: Vertical,
         panes: [
             (
-                size: "7",
+                size: "2",
                 pane: Split(
                     direction: Horizontal,
                     panes: [
@@ -54,8 +54,8 @@ layout: Split(
                                 direction: Vertical,
                                 panes: [
                                     (
-                                        size: "4",
-                                        borders: "ALL",
+                                        size: "2",
+                                        borders: "NONE",
                                         pane: Pane(Header),
                                     ),
                                 ]
@@ -66,20 +66,13 @@ layout: Split(
             ),
             (
                 size: "100%",
-                pane: Split(
-                    direction: Horizontal,
-                    panes: [
-                        (
-                            size: "100%",
-                            borders: "ALL",
-                            pane: Pane(TabContent),
-                        ),
-                    ]
-                ),
+                pane: Pane(TabContent),
+                borders: "ALL",
+                align: center,
             ),
             (
-                size: "3",
-                borders: "ALL",
+                size: "1",
+                borders: "NONE",
                 pane: Pane(ProgressBar),
             ),
         ],
@@ -88,45 +81,27 @@ layout: Split(
         rows: [
             (
                 left: [
-                    (kind: Property(Status(StateV2(playing_label: " ", paused_label: "❚❚", stopped_label: "❚❚"))), style: (fg: "yellow", modifiers: "Bold")),
                 ],
                 center: [
                     (kind: Property(Song(Title)), style: (modifiers: "Bold"),
                         default: (kind: Text("No Song"), style: (modifiers: "Bold"))
-                    )
+                    ),
                 ],
                 right: [
-                    (kind: Property(Widget(Volume)), style: (fg: "blue"))
                 ]
             ),
             (
-                left: [
+            left:[],
+            center:[
+                    (kind: Property(Status(StateV2(playing_label: " ", paused_label: "❚❚", stopped_label: "❚❚"))), style: (fg: "yellow", modifiers: "Bold")),
+                    (kind: Text("  ")),
                     (kind: Property(Status(Elapsed))),
                     (kind: Text(" / ")),
                     (kind: Property(Status(Duration))),
-                    (kind: Text(" (")),
-                    (kind: Property(Status(Bitrate))),
-                    (kind: Text(" kbps)"))
-                ],
-                center: [
-                    (kind: Property(Song(Artist)), style: (fg: "yellow", modifiers: "Bold"),
-                        default: (kind: Text("Unknown"), style: (fg: "yellow", modifiers: "Bold"))
-                    ),
-                    (kind: Text(" - ")),
-                    (kind: Property(Song(Album)),
-                        default: (kind: Text("Unknown Album"))
-                    )
-                ],
-                right: [
-                    (
-                        kind: Property(Widget(States(
-                            active_style: (fg: "white", modifiers: "Bold"),
-                            separator_style: (fg: "white")))
-                        ),
-                        style: (fg: "dark_gray")
-                    ),
-                ]
+            ],
+            right:[],
             ),
+
         ],
     ),
     browser_song_format: [
