@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Define file paths
+SOURCE_FILE_1="/home/deepak/ghq/github.com/Deepak22903/My_Shell_Scripts/global/rmpc_zen/configs/config_org.ron"
+DEST_FILE_1="/home/deepak/.config/rmpc/config.ron"
+
+SOURCE_FILE_2="/home/deepak/ghq/github.com/Deepak22903/My_Shell_Scripts/global/rmpc_zen/configs/default_org.ron"
+DEST_FILE_2="/home/deepak/.config/rmpc/themes/default.ron"
+
+# Check if source files exist
+if [ ! -f "$SOURCE_FILE_1" ]; then
+  echo "Error: Source file 1 ('$SOURCE_FILE_1') does not exist."
+  exit 1
+fi
+
+if [ ! -f "$SOURCE_FILE_2" ]; then
+  echo "Error: Source file 2 ('$SOURCE_FILE_2') does not exist."
+  exit 1
+fi
+
+# Move contents
+cat "$SOURCE_FILE_1" >>"$DEST_FILE_1"
+>"$SOURCE_FILE_1"
+
+cat "$SOURCE_FILE_2" >>"$DEST_FILE_2"
+>"$SOURCE_FILE_2"
